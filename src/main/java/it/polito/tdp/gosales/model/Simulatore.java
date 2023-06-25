@@ -44,7 +44,8 @@ public class Simulatore {
 		avgQ = this.dao.getAvgQ(r, p, anno);
 		this.costoUnitario = p.getUnit_cost();
 		this.prezzoUnitario = p.getUnit_price();
-		
+
+	// Probabilità pari a 20% + 1%*C con un massimo del 50% ....
 		this.threshold = Math.min(0.2 + 0.1*nConnessi, 0.5);
 	}
 	
