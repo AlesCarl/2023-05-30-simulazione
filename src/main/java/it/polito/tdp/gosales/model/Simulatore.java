@@ -57,18 +57,20 @@ public class Simulatore {
 	public void popolaCoda() {
 		this.queue = new PriorityQueue<Event>();
 		
-		//eventi rifornimento
+//eventi rifornimento... inizio di ogni mese
 		for (int i = 1; i<=12; i++) {
 			this.queue.add(new Event(EventType.RIFORNIMENTO,
 					LocalDate.of(anno, i, 1)));
 		}
+
 		
-		//eventi vendita
-		LocalDate data = LocalDate.of(anno, 1, 15);
+//eventi vendita, che partono il 15.1 e si ripetono ogni avgD giorni, fino al 31.12
+	    LocalDate data = LocalDate.of(anno, 1, 15);
+		
 		while(data.isBefore(LocalDate.of(anno, 12, 31))) {
-			this.queue.add(new Event(EventType.VENDITA,
-					data));
-			data = data.plusDays(avgD);
+			
+			this.queue.add( new Event(EventType.VENDITA, data));
+			data = data.plusDays(avgD);  // ocho
 		}
 	}
 	
