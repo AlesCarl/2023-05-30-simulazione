@@ -87,8 +87,11 @@ public class Simulatore {
 			Event e = queue.poll();
 			
 			switch(e.getType()) {
+
+					
 			case RIFORNIMENTO:
 				double prob = Math.random();
+					
 				if(prob <= this.threshold) {
 					Q += 0.8*N;
 					this.costo += this.costoUnitario*0.8*N;
@@ -97,19 +100,32 @@ public class Simulatore {
 					this.costo += this.costoUnitario*N;
 				}
 				break;
+
+					
 			case VENDITA:
 				this.clientiTot++;
+
+/** sono fatti un po a cazzo questi IF ... però vabbè è solo a scopo illustrativo */ 
+					
+			// se Q disp è > del 90% della domanda: cliente soddisfatto	
 				if (Q >= 0.9*avgQ) {
 					this.clientiSoddisfatti++;
 				}
+					
+			// se Q disp è < della domanda: 	
 				if(Q >=avgQ) {
 					this.ricavo += this.prezzoUnitario*avgQ;
 					Q-=avgQ;
+					
+			// se Q disp è < della domanda: vendo tutto 	
 				}else {
 					Q = 0;
 					this.ricavo += this.prezzoUnitario*Q;
 				}
 				break;
+
+
+					
 			default:
 				break;
 			}
